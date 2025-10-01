@@ -1,17 +1,14 @@
 #include <stdio.h>
 
-// Desafio Super Trunfo - Países
-// Tema 2 - Comparação das Cartas
- 
-    int main(){
+int main(){
 
-printf("***Desafio Lógico Super Trunfo - Novato***\n");
+printf("***Desafio Super Trunfo - Mestre***\n");
 
-//1. Definir nome para as variaveis que serão utilizadas:
+    //1. Definir nome para as variaveis que serão utilizadas:
     char estado1, estado2; 
     char codigo1[20], codigo2[20];
     char cidade1[20], cidade2[20];
-    int populacao1, populacao2; 
+    unsigned int populacao1, populacao2; 
     float area1, area2;
     float pib1, pib2;
     int ponto1, ponto2;
@@ -30,7 +27,7 @@ printf("***Desafio Lógico Super Trunfo - Novato***\n");
     scanf("%s", cidade1);
 
     printf("Digite o número de habitantes dessa cidade: \n", populacao1);
-    scanf("%d", &populacao1);
+    scanf("%u", &populacao1);
 
     printf("Digite o valor da área em km²: \n", area1);
     scanf("%f", &area1);
@@ -55,7 +52,7 @@ printf("***Desafio Lógico Super Trunfo - Novato***\n");
     scanf("%s", cidade2);
 
     printf("Digite o número de habitantes dessa cidade: \n", populacao2);
-    scanf("%d", &populacao2);
+    scanf("%u", &populacao2);
 
     printf("Digite o valor da área em km²: \n", area2);
     scanf("%f", &area2);
@@ -74,10 +71,12 @@ printf("***Desafio Lógico Super Trunfo - Novato***\n");
     printf("Estado: %c\n", estado1);
     printf("Código: %s\n", codigo1);
     printf("Nome da cidade: %s\n", cidade1);
-    printf("População: %d\n", populacao1);
+    printf("População: %u\n", populacao1);
     printf("Área: %.2f km²\n", area1);
-    printf("PIB: R$ %.2f bilhões\n", pib1);
+    printf("PIB: R$ %f bilhões\n", pib1);
     printf("Número de pontos turísticos: %d\n", ponto1);
+ 
+    // Desafio Avançado:
     //O valor da densidade será o valor da população da cidade dividido pela área da cidade;
     printf("Densidade Populacional: %.2f hab/km² \n", populacao1 / area1); 
     // O valor do PIB per capita será calculado com o PIB dividido pela população da cidade;
@@ -92,28 +91,69 @@ printf("***Desafio Lógico Super Trunfo - Novato***\n");
     printf("Estado: %c\n", estado2);
     printf("Código: %s\n", codigo2);
     printf("Nome da cidade: %s\n", cidade2);
-    printf("População: %d\n", populacao2);
+    printf("População: %u\n", populacao2);
     printf("Área: %.2f km²\n", area2);
-    printf("PIB: R$ %.2f bilhões\n", pib2);
+    printf("PIB: R$ %f bilhões\n", pib2);
     printf("Número de pontos turísticos: %d\n", ponto2);
     printf("Densidade Populacional: %.2f hab/km² \n", populacao2 / area2); 
     printf("PIB per capita: R$ %.2f \n", pib2 / populacao2); 
+ 
+    printf("------------------------\n");
 
-    //Definir com operações relacionais quais atributos ganham: 
-    printf("--------------------------------- \n");
+    //Desafio Mestre: 
+  
+    int Carta01;
+    float densidadepop1 = (float)populacao1 / area1;
+    float pibcap1 = (float)pib1 / populacao1;
 
-    printf("Comparação de Cartas (Atributo: PIB)! \n"); 
+    int Carta02;
+    float densidadepop2 = (float)populacao2 / area2;
+    float pibcap2 = (float)pib2 / populacao2;
 
-    printf("Carta 1 - PIB: R$ %.2f Bilhões \n", pib1);
-    printf("Carta 2 - PIB: R$ %.2f Bilhões \n", pib2);
+    // Calculo do "Super Poder" da Carta 1
+    // Atencao: o inverso da densidade e 1.0 / densidade_populacional
+    float super_poder1 = (float)populacao1 + area1 + (float)pib1 + (float)ponto1 + pibcap1 + (1.0 / densidadepop1);
 
-    if ( pib1 > pib2){
-        printf(" Carta 01 venceu! \n");
-    } else {
-        printf(" Carta 02 venceu! \n");
-    }
+    // Calculo do "Super Poder" da Carta 2
+    float super_poder2 = (float)populacao2 + area2 + (float)pib2 + (float)ponto2 + pibcap2 + (1.0 / densidadepop2);
 
-    printf("***Desafio concluido com sucesso!***");
+    printf("*** Super Poder ***\n\n");
+    printf("Super Poder da Carta 1: %.2f\n", super_poder1);
+    printf("Super Poder da Carta 2: %.2f\n", super_poder2);
+    printf("----------------------------------\n\n");
+
+    // --- Comparar cada atributo e exibir o resultado ---
+    
+    printf("Resultado das Comparacoes (1 = Carta 1 vence, 0 = Carta 2 vence):\n\n");
+
+    // Comparação de População (maior valor vence)
+    printf("População (maior vence): %u\n", populacao1 > populacao2);
+
+    // Comparacao de Area (maior valor vence)
+    printf("Área (maior vence): %d\n", area1 > area2);
+
+    // Comparacao de PIB (maior valor vence)
+    printf("PIB (maior vence): %d\n", pib1 > pib2);
+    
+    // Comparacao de Pontos Turisticos (maior valor vence)
+    printf("Pontos Turisticos (maior vence): %d\n", ponto1 > ponto2);
+
+    // Comparacao de PIB per Capita (maior valor vence)
+    printf("PIB per Capita (maior vence): %d\n", pibcap1 > pibcap2);
+
+    // Comparacao de Densidade Populacional (menor valor vence)
+    // A logica aqui e invertida: usamos o operador '<' para mostrar que
+    // a Carta 1 vence se o seu valor for menor que o da Carta 2.
+    printf("Densidade Populacional (menor vence): %d\n", densidadepop1 < densidadepop2);
+
+    // Comparacao de Super Poder (maior valor vence)
+    printf("Super Poder (maior vence): %d\n\n", super_poder1 > super_poder2);
+
+
+
+    printf("***Desafio Mestre concluido com sucesso!***");
+
+    
 
     return 0;
 }
